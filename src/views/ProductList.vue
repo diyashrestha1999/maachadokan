@@ -14,7 +14,7 @@
       </v-btn>
     </router-link>
 
-    <v-sheet class="font rounded-lg" width="1250" height="96% ">
+    <v-sheet class="font rounded-lg" width=100% height="96% ">
       <v-container grid-list-md>
         <v-layout row wrap>
           <v-flex v-for="product in products" :key="product.name">
