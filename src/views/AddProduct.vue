@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-12">
+  <v-card class="ma-12 orange lighten-2" dark>
     <form class="pa-12" @submit.prevent="checkform">
       <v-text-field
         v-model="name"
@@ -46,15 +46,15 @@
         :error-messages="pushError($v.price)"
         label="Price"
         type="number"
-        min="0" step="1" 
+        min="0"
+        step="1"
         required
         @input="$v.price.$touch()"
         @blur="$v.price.$touch()"
       ></v-text-field>
 
-
-      <v-btn class="mt-4 mr-4" type="submit"> submit </v-btn>
-      <v-btn class="mt-4" @click="clear"> clear </v-btn>
+      <v-btn class="mt-4 mr-4" type="submit" color="white orange--text" > submit </v-btn>
+      <v-btn class="mt-4" @click="clear" color="white red--text" dark> clear </v-btn>
     </form>
   </v-card>
 </template>
@@ -84,15 +84,13 @@ export default {
     numberValue: "",
   }),
 
-
   created() {
     this.get_categories();
     this.get_shoplist();
   },
 
   methods: {
-      pushError(val) {
-     
+    pushError(val) {
       const errors = [];
       if (!val.$dirty) return errors;
       !val.required && errors.push("This is required.");

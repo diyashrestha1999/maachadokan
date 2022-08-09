@@ -6,7 +6,7 @@
       class="font rounded-lg"
       elevation="12"
      
-      height="98%"
+      height="100%"
     >
       <v-navigation-drawer color="grey darken-4" floating permanent >
         <v-list dense rounded>
