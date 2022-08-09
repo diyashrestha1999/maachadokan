@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <router-link to="/addproduct">
+    <router-link to="/addproduct"  style="text-decoration: none">
       <v-btn
         color="orange"
-        class="white--text ma-6"
+        class="white--text ma-6 "
         fab
         small
         right
@@ -14,7 +14,7 @@
       </v-btn>
     </router-link>
 
-    <v-sheet class="font rounded-lg" width="950" height="96%">
+    <v-sheet class="font rounded-lg" width="1250" height="96% ">
       <v-container grid-list-md>
         <v-layout row wrap>
           <v-flex v-for="product in products" :key="product.name">

@@ -11,16 +11,14 @@
       ></v-text-field>
       <v-text-field
         v-model="description"
-        :error-messages="descriptionErrors"
+      
         label="Description"
         required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
       ></v-text-field>
       <v-select
         v-model="categoryList"
         :items="categorylist"
-        :error-messages="categorylistErrors"
+    
         label="Category"
         required
         @change="$v.select.$touch()"
@@ -29,26 +27,21 @@
       <v-select
         v-model="shoplist"
         :items="shoplist"
-        :error-messages="shoplistErrors"
+       
         label="Shop"
         required
-        @change="$v.select.$touch()"
-        @blur="$v.select.$touch()"
       ></v-select>
 
       <v-text-field
         v-model="numberValue"
-        :error-messages="nameErrors"
         hide-details
         single-line
         type="number"
         label="Price"
         required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
       ></v-text-field>
 
-      <v-btn class="mt-4 mr-4" @click="submit"> submit </v-btn>
+      <v-btn class="mt-4 mr-4" @click="submitProduct"> submit </v-btn>
       <v-btn class="mt-4" @click="clear"> clear </v-btn>
     </form>
   </v-card>
@@ -80,7 +73,8 @@ export default {
     shoplist: [],
     checkbox: false,
     categories: [],
-    shops:[]
+    shops: [],
+    numberValue: "",
   }),
 
   computed: {
@@ -90,13 +84,7 @@ export default {
       !this.$v.checkbox.checked && errors.push("You must agree to continue!");
       return errors;
     },
-   
-    // categorylistErrors() {
-    //   const errors = [];
-    //   if (!this.$v.select.$dirty) return errors;
-    //   !this.$v.select.required && errors.push("Item is required");
-    //   return errors;
-    // },
+
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
@@ -119,15 +107,14 @@ export default {
   },
 
   methods: {
-    submit() {
-      this.$v.$touch();
-    },
     clear() {
       this.$v.$reset();
       this.name = "";
       this.email = "";
       this.categorylist = null;
       this.checkbox = false;
+      this.numberValue = "";
+      this.shopslist = null;
     },
     get_categories() {
       axios({
@@ -143,18 +130,44 @@ export default {
           console.log(response);
         });
     },
-    get_shoplist(){
-        axios({
-            methos:"get",
-            url:"http://localhost:8000/api/shop/",
+    get_shoplist() {
+      axios({
+        method: "get",
+        url: "http://localhost:8000/api/shop/",
+      }).then((response) => {
+        this.shops = response.data;
+        this.shops.forEach((ele) => this.shoplist.push(ele.name));
+        console.log(this.shoplist);
+      });
+    },
+    submitProduct() {
+      this.$axios
+        .post("http://localhost:8080/addproduct", {
+          name: this.name,
+          description: this.description,
+          category: this.categorylist,
+          price: this.price,
+          shop: this.shopslist,
         })
-        .then((response)=>{
-            this.shops=response.data;
-            this.shops.forEach((ele)=>this.shoplist.push(ele.name));
-            console.log(this.shoplist);
+        .then((response) => {
+          if (response && response.data && !response.data.success) {
+            this.modalMessage = response.data.message;
+            this.success = false;
+          } else {
+            
+              this.name= "",
+              this.description= "",
+              this.category=""
+              this.price= "",
+              this.shop=""
 
+          }
         })
-    }
+        .catch(() => {
+          this.modalMessage = "Something went wrong. Please try again.";
+          this.success = false;
+        });
+    },
   },
 };
 </script>
