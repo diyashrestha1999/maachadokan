@@ -1,7 +1,9 @@
 <template>
-  <v-card class="ma-12 orange lighten-2" dark>
-    <form class="pa-12" @submit.prevent="checkform">
+  <v-card class="ma-12  lighten-2" >
+    <form class="pa-12 white--text" @submit.prevent="checkform">
       <v-text-field
+        outlined      
+        color="orange"
         v-model="name"
         :error-messages="pushError($v.name)"
         label="Product Name"
@@ -10,6 +12,8 @@
         @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
+        outlined      
+        color="orange"
         v-model="description"
         label="Description"
         required
@@ -17,6 +21,8 @@
         @blur="$v.description.$touch()"
       ></v-text-field>
       <v-select
+        outlined      
+        color="orange"
         :items="categories"
         v-model="category"
         label="Category"
@@ -29,6 +35,8 @@
       >
       </v-select>
       <v-select
+        outlined      
+        color="orange"
         v-model="shop"
         :items="shops"
         label="Shop"
@@ -41,6 +49,8 @@
       >
       </v-select>
       <v-text-field
+        outlined      
+        color="orange"
         v-model="price"
         single-line
         :error-messages="pushError($v.price)"
@@ -53,8 +63,8 @@
         @blur="$v.price.$touch()"
       ></v-text-field>
 
-      <v-btn class="mt-4 mr-4" type="submit" color="white orange--text" > submit </v-btn>
-      <v-btn class="mt-4" @click="clear" color="white red--text" dark> clear </v-btn>
+      <v-btn class="mt-4 mr-4" type="submit" color="orange " dark> submit </v-btn>
+      <v-btn class="mt-4" @click="clear" color="white " > clear </v-btn>
     </form>
   </v-card>
 </template>
@@ -96,7 +106,7 @@ export default {
       !val.required && errors.push("This is required.");
       return errors;
     },
-    clear() {
+    clear(){
       this.$v.$reset();
       this.name = "";
       this.description = "";
@@ -126,6 +136,8 @@ export default {
       });
     },
     checkform() {
+      
+
       console.log(
         "------------------------------------------------------------------"
       );
@@ -141,9 +153,13 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          this.$router.push({name:'product'});
         })
         .catch((res) => console.log(res));
     },
   },
 };
 </script>
+<style scoped>
+
+</style>

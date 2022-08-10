@@ -48,17 +48,7 @@
                   </v-expand-transition>
                 </v-img>
                 <v-card-text class="pt-6" style="position: absolute">
-                  <v-btn
-                    absolute
-                    color="orange"
-                    class="white--text"
-                    fab
-                    x-small
-                    right
-                    top
-                  >
-                    <v-icon small>mdi-dots-vertical</v-icon>
-                  </v-btn>
+                  <ProductDialogVue />
 
                   <h3
                     class="
@@ -80,11 +70,18 @@
   </v-app>
 </template>
 <script>
+import ProductDialogVue from "@/components/ProductDialog.vue";
 import axios from "axios";
 export default {
+  components: {
+    ProductDialogVue,
+  },
+
   data() {
     return {
       products: [],
+      dialog: false,
+    
     };
   },
   mounted() {
