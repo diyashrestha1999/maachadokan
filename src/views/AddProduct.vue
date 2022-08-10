@@ -25,7 +25,7 @@
         color="orange"
         :items="categories"
         v-model="category"
-        label="Category"
+        label="Categories"
         required
         item-text="name"
         item-value="id"
