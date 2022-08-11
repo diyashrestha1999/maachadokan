@@ -8,6 +8,8 @@ import CustomerList from '../views/CustomerList.vue'
 import ShopList from '../views/ShopList.vue'
 import VendorList from '../views/VendorList.vue'
 import AddProduct from '../views/AddProduct.vue'
+import ProductDetail from '../views/ProductDetail.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -50,6 +52,12 @@ const routes = [
     path: '/addproduct',
     name: 'addproduct',
     component: AddProduct
+  },
+  
+  {
+    path: '/ProductDetail',
+    name: 'ProductDetail',
+    component: ProductDetail
   }
 ]
 

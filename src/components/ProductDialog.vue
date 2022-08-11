@@ -1,5 +1,5 @@
 <template>
-  <v-menu open-on-hover down offset-y v-model="dialog"  max-width="290">
+  <v-menu open-on-hover down offset-y v-model="dialog" max-width="290">
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         absolute
@@ -16,26 +16,56 @@
       </v-btn>
     </template>
 
-        <v-list v-for="(item, index) in items" :key="index" class="pa-1">
-          <v-btn   class=" orange lighten-2 white--text" x-small  @click="dialog = false">
-            <v-icon small>{{ item.title }}</v-icon>
+    <v-list class="pa-1">
+      <v-list-item>
+        <router-link to="/ProductDetail" style="text-decoration: none">
+          <v-btn
+            class="orange lighten-2 white--text"
+            x-small
+            @click="dialog = false"
+          >
+            <v-icon small>mdi-pencil</v-icon>
           </v-btn>
-        </v-list>
-   
+        </router-link>
+      </v-list-item>
+      <!-- <v-list-item>
+        <v-btn
+          class="orange lighten-2 white--text"
+          x-small
+          @click="dialog = false"
+        >
+          <v-icon small>mdi-menu-down</v-icon>
+        </v-btn>
+      </v-list-item> -->
+      <v-list-item>
+        <v-btn
+          color="orange lighten-2 white--text"
+          x-small
+          @click="deleteProduct(id)"
+        >
+          <v-icon small>mdi-delete</v-icon>
+        </v-btn>
+      </v-list-item>
+    </v-list>
   </v-menu>
 </template>
 <script>
+import axios from "axios";
+
 export default {
+  props: ["id"],
   data() {
     return {
       dialog: false,
-       items: [
-      { title: "mdi-pencil" },
-      { title: "mdi-menu-down" },
-      { title: "mdi-delete" },
-    ],
     };
+  },
+  methods: {
+    deleteProduct(id) {
+      console.log("deleted");
+      axios.delete(`http://localhost:8000/api/Product/${id}/`).then(() => {
+        this.$emit("delete");
+      });
+    },
   },
 };
 </script>
-

@@ -1,8 +1,8 @@
 <template>
-  <v-card class="ma-12  lighten-2" >
+  <v-card class="ma-12 lighten-2">
     <form class="pa-12 white--text" @submit.prevent="checkform">
       <v-text-field
-        outlined      
+        outlined
         color="orange"
         v-model="name"
         :error-messages="pushError($v.name)"
@@ -12,7 +12,7 @@
         @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
-        outlined      
+        outlined
         color="orange"
         v-model="description"
         label="Description"
@@ -21,12 +21,12 @@
         @blur="$v.description.$touch()"
       ></v-text-field>
       <v-select
-        outlined      
+        outlined
         color="orange"
         :items="categories"
         v-model="category"
         label="Categories"
-        required
+        :required="!category"
         item-text="name"
         item-value="id"
         :error-messages="pushError($v.category)"
@@ -35,7 +35,7 @@
       >
       </v-select>
       <v-select
-        outlined      
+        outlined
         color="orange"
         v-model="shop"
         :items="shops"
@@ -48,8 +48,9 @@
         @click="get_shoplist"
       >
       </v-select>
+
       <v-text-field
-        outlined      
+        outlined
         color="orange"
         v-model="price"
         single-line
@@ -59,12 +60,20 @@
         min="0"
         step="1"
         required
-        @input="$v.price.$touch()"
         @blur="$v.price.$touch()"
       ></v-text-field>
 
-      <v-btn class="mt-4 mr-4" type="submit" color="orange " dark> submit </v-btn>
-      <v-btn class="mt-4" @click="clear" color="white " > clear </v-btn>
+      <v-btn
+        class="mt-4 mr-4"
+        type="submit"
+        color="orange "
+        id="register"
+        value="Register"
+        dark
+      >
+        submit
+      </v-btn>
+      <v-btn class="mt-4" @click="clear" color="white "> clear </v-btn>
     </form>
   </v-card>
 </template>
@@ -106,7 +115,7 @@ export default {
       !val.required && errors.push("This is required.");
       return errors;
     },
-    clear(){
+    clear() {
       this.$v.$reset();
       this.name = "";
       this.description = "";
@@ -136,8 +145,6 @@ export default {
       });
     },
     checkform() {
-      
-
       console.log(
         "------------------------------------------------------------------"
       );
@@ -153,7 +160,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.$router.push({name:'product'});
+          this.$router.push({ name: "product" });
         })
         .catch((res) => console.log(res));
     },
@@ -161,5 +168,4 @@ export default {
 };
 </script>
 <style scoped>
-
 </style>

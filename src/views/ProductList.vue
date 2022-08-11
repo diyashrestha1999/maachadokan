@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-container class="grey lighten-5">
+   
       <router-link to="/addproduct" style="text-decoration: none">
         <v-btn
           color="orange"
@@ -9,13 +10,13 @@
           small
           right
           top
-          v-model="add"
+    
         >
           <v-icon small color="white">mdi-plus</v-icon>
         </v-btn>
       </router-link>
       <v-row>
-        <v-col v-for="product in products" :key="product.name" md="2">
+        <v-col v-for="product in products" :key="product.id" md="2">
           <v-card
             class="font rounded-lg"
             elevation="5"
@@ -35,7 +36,6 @@
                         d-flex
                         transition-fast-in-fast-out
                         orange
-                        darken-6
                         v-card--reveal
                         text-h6
                         white--text
@@ -48,8 +48,7 @@
                   </v-expand-transition>
                 </v-img>
                 <v-card-text class="pt-6" style="position: absolute">
-                  <ProductDialogVue />
-
+                  <ProductDialogVue :id="product.id" @delete="get_products"/>
                   <h3
                     class="
                       font-weight-heavy
@@ -90,6 +89,7 @@ export default {
   methods: {
     addProduct() {},
     get_products() {
+          
       axios({
         method: "get",
         url: "http://127.0.0.1:8000/api/Product/",
