@@ -1,6 +1,7 @@
 <template>
   <v-card class="ma-12 lighten-2">
-    <form class="pa-12 white--text" @submit.prevent="checkform">
+    <form class="pa-12 white--text" 
+    >
       <v-text-field
         outlined
         color="orange"

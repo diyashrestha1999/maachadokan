@@ -18,7 +18,7 @@
 
     <v-list class="pa-1">
       <v-list-item>
-        <router-link to="/ProductDetail" style="text-decoration: none">
+        <router-link :to="{name:'ProductDetail', params:{id:id}}" style="text-decoration: none">
           <v-btn
             class="orange lighten-2 white--text"
             x-small
@@ -46,13 +46,17 @@
           <v-icon small>mdi-delete</v-icon>
         </v-btn>
       </v-list-item>
+
     </v-list>
   </v-menu>
 </template>
 <script>
 import axios from "axios";
 
+
+
 export default {
+ 
   props: ["id"],
   data() {
     return {

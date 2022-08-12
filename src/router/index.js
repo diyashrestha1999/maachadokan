@@ -54,12 +54,15 @@ const routes = [
     component: AddProduct
   },
   
-  {
-    path: '/ProductDetail',
+  { 
+    path: '/ProductDetail/:id',
     name: 'ProductDetail',
-    component: ProductDetail
+    component: ProductDetail,
+  
+    
   }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
