@@ -1,7 +1,6 @@
 <template>
   <v-card class="ma-12 lighten-2">
-    <form class="pa-12 white--text" 
-    >
+    <form class="pa-12 white--text" @submit.prevent="checkform">
       <v-text-field
         outlined
         color="orange"
@@ -83,10 +82,8 @@
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import axios from "axios";
-
 export default {
   mixins: [validationMixin],
-
   validations: {
     name: { required },
     shop: { required },
@@ -94,7 +91,6 @@ export default {
     description: { required },
     price: { required },
   },
-
   data: () => ({
     name: "",
     description: "",
@@ -103,12 +99,10 @@ export default {
     shops: [],
     numberValue: "",
   }),
-
   created() {
     this.get_categories();
     this.get_shoplist();
   },
-
   methods: {
     pushError(val) {
       const errors = [];
@@ -150,7 +144,6 @@ export default {
         "------------------------------------------------------------------"
       );
       console.log(this.category);
-
       axios
         .post("http://127.0.0.1:8000/api/Product/", {
           name: this.name,
