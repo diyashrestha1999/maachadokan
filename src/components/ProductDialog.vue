@@ -66,7 +66,7 @@ export default {
   methods: {
     deleteProduct(id) {
       console.log("deleted");
-      axios.delete(`http://localhost:8000/api/Product/${id}/`).then(() => {
+      axios.delete(`http://localhost:8000/api/product/${id}/`).then(() => {
         this.$emit("delete");
       });
     },

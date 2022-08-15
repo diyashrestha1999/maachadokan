@@ -71,7 +71,7 @@
         value="Register"
         dark
       >
-        submit
+        Submit
       </v-btn>
       <v-btn class="mt-4" @click="clear" color="white "> clear </v-btn>
     </form>
@@ -145,11 +145,11 @@ export default {
       );
       console.log(this.category);
       axios
-        .post("http://127.0.0.1:8000/api/Product/", {
+        .post("http://127.0.0.1:8000/api/product/", {
           name: this.name,
           description: this.description,
-          shop: [4],
-          category: 4,
+          shop: [this.shop],
+          category: this.category,
           price: this.price,
         })
         .then((response) => {
