@@ -28,15 +28,7 @@
           </v-btn>
         </router-link>
       </v-list-item>
-      <!-- <v-list-item>
-        <v-btn
-          class="orange lighten-2 white--text"
-          x-small
-          @click="dialog = false"
-        >
-          <v-icon small>mdi-menu-down</v-icon>
-        </v-btn>
-      </v-list-item> -->
+
       <v-list-item>
         <v-btn
           color="orange lighten-2 white--text"

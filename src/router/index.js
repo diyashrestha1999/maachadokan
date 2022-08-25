@@ -9,6 +9,8 @@ import ShopList from '../views/ShopList.vue'
 import VendorList from '../views/VendorList.vue'
 import AddProduct from '../views/AddProduct.vue'
 import ProductDetail from '../views/ProductDetail.vue'
+import OrderDetail from '../views/OrderDetail.vue'
+import CategoryProduct from '../views/CategoryProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +62,18 @@ const routes = [
     component: ProductDetail,
   
     
+  },
+  { 
+    path: '/orderdetail/:id',
+    name: 'OrderDetail',
+    component: OrderDetail,
+  
+    
+  },
+  {
+    path:'/categoryproduct/:id',
+    name:'CategoryProduct',
+    component:CategoryProduct,
   }
 ]
 

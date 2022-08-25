@@ -18,7 +18,7 @@
                 v-model="product.name"
                 label="Product Name"
                 clearable
-               :rules="fieldRules"
+                :rules="fieldRules"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -110,7 +110,7 @@ export default {
       shops: [],
       categories: [],
 
-valid: true,
+      valid: true,
       fieldRules: [(v) => !!v || "Field is required"],
 
       product: {
@@ -159,34 +159,31 @@ valid: true,
     this.get_product_details();
   },
   methods: {
-   getShopIds(shop){
-    let shopIds = []
-     if (
-        shop.length === 1 && typeof shop[0] !== "number"
-      ) {
+    getShopIds(shop) {
+      let shopIds = [];
+      if (shop.length === 1 && typeof shop[0] !== "number") {
         shopIds = [shop[0].id];
       }
 
-      if (shop.length > 1){
-        shop.forEach(sh => {
-          if (typeof sh !== "number"){
-            shopIds.push(sh.id)
+      if (shop.length > 1) {
+        shop.forEach((sh) => {
+          if (typeof sh !== "number") {
+            shopIds.push(sh.id);
           }
-        })
+        });
       }
 
-      if (!shopIds.length){
-        shopIds = shop
+      if (!shopIds.length) {
+        shopIds = shop;
       }
-    return shopIds
+      return shopIds;
     },
     reset() {
       this.$v.$reset();
       this.get_product_details();
-  
     },
     checkform() {
-        this.$refs.form.validate()
+      this.$refs.form.validate();
 
       axios
         .put(`http://localhost:8000/api/product/${this.id}/`, {
