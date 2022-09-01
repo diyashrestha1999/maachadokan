@@ -49,6 +49,7 @@
               dark
 
             >
+            <DeleteCategoryVue  :id="item.id" @delete="getCategory"/>
               <router-link
                 :to="{ name: 'CategoryProduct', params: { id: item.id } }"
                 style="text-decoration: none"
@@ -58,7 +59,7 @@
               </router-link>
             </v-card>
           <!-- </template> -->
-          <v-icon small>mdi-delete</v-icon>
+          <!-- <v-icon small>mdi-delete</v-icon> -->
         <!-- </v-dialog> -->
       </v-row>
     </div>
@@ -66,8 +67,12 @@
 </template>
 <script>
 import axios from "axios";
+import DeleteCategoryVue from "@/components/DeleteCategory.vue";
 
 export default {
+  components:{
+    DeleteCategoryVue
+  },
   data() {
     return {
       dialog: false,
@@ -87,6 +92,7 @@ export default {
       })
         .then((response) => {
           this.category = response.data;
+          
         })
         .catch((response) => {
           console.log(response);
@@ -100,6 +106,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.dialog = false;
+          this.getCategory()
           // alert("sucessfull!!")
         })
         .catch((res) => console.log(res));

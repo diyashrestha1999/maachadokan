@@ -1,16 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SideNavView from '../views/SideNavView.vue'
+// import SideNavView from '../views/SideNavView.vue'
 import ProductList from '../views/ProductList.vue'
 import OrderList from '../views/OrderList.vue'
 import CategoryList from '../views/CategoryList.vue'
 import CustomerList from '../views/CustomerList.vue'
 import ShopList from '../views/ShopList.vue'
-import VendorList from '../views/VendorList.vue'
+// import VendorList from '../views/VendorList.vue'
 import AddProduct from '../views/AddProduct.vue'
 import ProductDetail from '../views/ProductDetail.vue'
 import OrderDetail from '../views/OrderDetail.vue'
 import CategoryProduct from '../views/CategoryProduct.vue'
+import VendorNew from '../views/VendorNew.vue'
+import DashBoard from '../views/DashBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -18,7 +20,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: SideNavView
+    component: DashBoard
   },
   {
     path: '/productlist',
@@ -30,11 +32,11 @@ const routes = [
     name: 'order',
     component: OrderList
   },
-  {
-    path: '/vendorlist',
-    name: 'vendor',
-    component: VendorList
-  },
+  // {
+  //   path: '/vendorlist',
+  //   name: 'vendor',
+  //   component: VendorList
+  // },
   {
     path: '/shoplist',
     name: 'shop',
@@ -74,6 +76,11 @@ const routes = [
     path:'/categoryproduct/:id',
     name:'CategoryProduct',
     component:CategoryProduct,
+  },
+  {
+    path:'/vendor',
+    name:'Vendor',
+    component:VendorNew,
   }
 ]
 

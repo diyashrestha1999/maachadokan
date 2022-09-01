@@ -132,6 +132,8 @@ export default {
     },
     get_shoplist() {
       axios({
+
+        
         method: "get",
         url: "http://localhost:8000/api/shop/",
       }).then((response) => {
