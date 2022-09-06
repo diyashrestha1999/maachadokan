@@ -13,6 +13,8 @@ import OrderDetail from '../views/OrderDetail.vue'
 import CategoryProduct from '../views/CategoryProduct.vue'
 import VendorNew from '../views/VendorNew.vue'
 import DashBoard from '../views/DashBoard.vue'
+import VendorDetail from '../views/VendorDetail.vue'
+import CustomerDetail from '../views/CustomerDetail.vue'
 
 
 Vue.use(VueRouter)
@@ -82,6 +84,16 @@ const routes = [
     path:'/vendor',
     name:'Vendor',
     component:VendorNew,
+  },
+  {
+    path:'/vendordetail/:id',
+    name:'VendorDetail',
+    component:VendorDetail,
+  },
+  {
+    path:'/customerdetail/:id',
+    name:'customerDetail',
+    component:CustomerDetail,
   },
   
 ]

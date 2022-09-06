@@ -5,11 +5,11 @@
       <template>
         <thead>
           <tr>
-            <th class="text-left orange--text">Id</th>
-            <th class="text-left orange--text">Order Date</th>
-            <th class="text-left orange--text">Deliver Date</th>
-            <th class="text-left orange--text">Ordered By</th>
-            <th class="text-left orange--text">Total</th>
+            <th class="text-left orange--text text-overline">Id</th>
+            <th class="text-left orange--text text-overline">Order Date</th>
+            <th class="text-left orange--text text-overline">Deliver Date</th>
+            <th class="text-left orange--text text-overline">Ordered By</th>
+            <th class="text-left orange--text text-overline">Total</th>
             <th></th>
           </tr>
         </thead>

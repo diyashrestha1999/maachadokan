@@ -88,12 +88,12 @@
 
         <v-list-item color="rgba(0, 0, 0, .4)">
           <v-list-item-content>
-            <v-list-item-title class="title">{{
+            <v-list-item-title class="title text-overline">{{
               vendor.name
             }}</v-list-item-title>
-            <v-list-item-subtitle>Trader</v-list-item-subtitle>
-            <v-list-item-subtitle>{{ vendor.number }}</v-list-item-subtitle>
-            <v-list-item-subtitle>{{ vendor.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">Trader</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-overline">{{ vendor.number }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">{{ vendor.email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>

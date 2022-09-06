@@ -82,12 +82,12 @@
 
         <v-list-item color="rgba(0, 0, 0, .4)">
           <v-list-item-content>
-            <v-list-item-title class="title">{{
+            <v-list-item-title class="title text-overline ">{{
               customer.name
             }}</v-list-item-title>
-            <v-list-item-subtitle>Customer</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">Customer</v-list-item-subtitle>
 
-            <v-list-item-subtitle>{{ customer.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">{{ customer.email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>
@@ -125,7 +125,7 @@ export default {
   },
   methods: {
     reset() {
-      this.getCustomerList()
+      this.getCustomerList();
     },
     addCustomer() {
       axios

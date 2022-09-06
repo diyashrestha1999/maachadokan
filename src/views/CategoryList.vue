@@ -55,7 +55,7 @@
                 style="text-decoration: none"
               >
                 <v-subheader><v-icon x-large>mdi-shape</v-icon></v-subheader>
-                <v-subheader>{{ item.name }}</v-subheader>
+                <v-subheader class="text-overline">{{ item.name }}</v-subheader>
               </router-link>
             </v-card>
           <!-- </template> -->

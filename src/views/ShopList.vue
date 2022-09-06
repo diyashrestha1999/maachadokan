@@ -58,9 +58,9 @@
         height="150"
       >
         <DeleteShopVue :id="shop.id" @delete="getShop" />
-        <v-card-title class="text-h5 font rounded-lg">{{ shop.name }} </v-card-title>
+        <v-card-title class="text-h5 font rounded-lg text-overline">{{ shop.name }} </v-card-title>
 
-        <v-card-subtitle>{{ shop.owner.name }} </v-card-subtitle>
+        <v-card-subtitle class="text-caption">{{ shop.owner.name }} </v-card-subtitle>
         <!-- 
           <v-card-actions>
             <v-btn text> View Deatils </v-btn>

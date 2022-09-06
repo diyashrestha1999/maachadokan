@@ -17,7 +17,7 @@
         <router-link to="/orderlist" style="text-decoration: none">
           <v-card-title>
             <v-icon large left> mdi-order-bool-ascending-variant </v-icon>
-            <span class="text-h6 font-weight-light grey--text ">ORDER</span>
+            <span class="text-h6 font-weight-light grey--text text-overline ">ORDER</span>
           </v-card-title>
         </router-link>
       </v-card>
@@ -26,15 +26,15 @@
         <router-link to="/categorylist" style="text-decoration: none">
           <v-card-title>
             <v-icon large left> mdi-shape </v-icon>
-            <span class="text-h6 font-weight-light grey--text">CATEGORY</span>
+            <span class="text-h6 font-weight-light grey--text text-overline">CATEGORY</span>
           </v-card-title>
         </router-link>
       </v-card>
       <v-card class="ma-8 card" color="grey darken-4" dark width="40%">
         <router-link to="/productlist" style="text-decoration: none">
           <v-card-title>
-            <v-icon large left> mdi-purse </v-icon>
-            <span class="text-h6 font-weight-light white--text">PRODUCTS</span>
+            <v-icon  large left> mdi-purse </v-icon>
+            <span class="text-h6 font-weight-light white--text text-overline">PRODUCTS</span>
           </v-card-title>
         </router-link>
       </v-card>
@@ -43,7 +43,7 @@
       <router-link to="/shoplist" style="text-decoration: none">
         <v-card-title>
           <v-icon large left> mdi-shopping </v-icon>
-          <span class="text-h6 font-weight-light grey--text">SHOP</span>
+          <span class="text-h6 font-weight-light grey--text text-overline">SHOP</span>
         </v-card-title>
         <v-row>
       <v-card
@@ -56,9 +56,9 @@
         height="150"
       >
     
-        <v-card-title class="text-h5 font rounded-lg">{{ shop.name }} </v-card-title>
+        <v-card-title class="text-h5 font rounded-lg text-overline">{{ shop.name }} </v-card-title>
 
-        <v-card-subtitle>{{ shop.owner.name }} </v-card-subtitle>
+        <v-card-subtitle class="text-caption">{{ shop.owner.name }} </v-card-subtitle>
         <!-- 
           <v-card-actions>
             <v-btn text> View Deatils </v-btn>
