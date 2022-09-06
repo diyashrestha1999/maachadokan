@@ -1,84 +1,56 @@
 <template>
-  <v-card class="ma-4" max-width="96%" height="95%" title>
-    <v-list dense>
-      <v-subheader>Orders List</v-subheader>
-
-      <v-list-item class="orange--text pl-10">
-        <v-list-item-content>
-          <v-list-item-title>ID</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Order Date</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Deliver Date</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Ordered By</v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-content>
-          <v-list-item-title>Total</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <!-- <v-dialog v-model="dialog" width="500" > -->
-      <!-- <template v-slot:activator="{ on, attrs }"> -->
-
-      <v-list-item v-for="order_detail in order_details" :key="order_detail.id">
-        <v-hover v-slot="{ hover }" open-delay="200">
-          <v-card
-            width="100%"
-            height="35"
-            :elevation="hover ? 10 : 0"
-            :class="{ 'on-hover': hover }"
-           
+  <v-card elevation="24" class="ma-4" max-width="96%" height="95%" title>
+    <v-subheader>Orders List</v-subheader>
+    <v-simple-table>
+      <template>
+        <thead>
+          <tr>
+            <th class="text-left orange--text">Id</th>
+            <th class="text-left orange--text">Order Date</th>
+            <th class="text-left orange--text">Deliver Date</th>
+            <th class="text-left orange--text">Ordered By</th>
+            <th class="text-left orange--text">Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="font-weight-black tr"
+            v-for="order_detail in order_details"
+            :key="order_detail.id"
+            @click="orderDetails(order_detail.id)"
           >
-            <router-link
-              :to="{ name: 'OrderDetail', params: { id: order_detail.id } }"
-              style="text-decoration: none"
-            >
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon>mdi-numeric-{{ order_detail.id }}-circle</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    order_detail.order.order_date
-                  }}</v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    order_detail.order.deliver_date
-                  }}</v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    order_detail.order.customer.name
-                  }}</v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title
-                    >${{ order_detail.order.pricing }}</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-            </router-link>
-          </v-card>
-        </v-hover>
-      </v-list-item>
+            <!-- <td>{{ item.name }}</td>
+            <td>{{ item.calories }}</td> -->
 
-      <!-- </template> -->
-
-      <!-- </v-dialog>  -->
-    </v-list>
+            <td>
+              <v-icon small class="font-weight-black grey--text">{{
+                order_detail.id
+              }}</v-icon>
+            </td>
+            <td>{{ order_detail.order.order_date }}</td>
+            <td>{{ order_detail.order.deliver_date }}</td>
+            <td>{{ order_detail.order.customer.name }}</td>
+            <td>${{ order_detail.order.pricing }}</td>
+            <td>
+              <v-icon @click.stop="deleteOrder(order_detail.id)" small class="delete"
+                >mdi-delete</v-icon
+              >
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </v-card>
 </template>
+
 <script>
 import axios from "axios";
 export default {
   props: ["id"],
   data: () => ({
     dialog: false,
+    // noRedirect:false,
 
     order_details: {
       id: "",
@@ -117,6 +89,15 @@ export default {
     this.getOrderLists();
   },
   methods: {
+    deleteOrder(id) {
+      axios.delete(`http://localhost:8000/api/orderDetail/${id}/`).then(() => {
+        this.getOrderLists();
+        // this.noRedirect=true
+      });
+    },
+    orderDetails(id) {
+      this.$router.push(`orderDetail/${id}`);
+    },
     getOrderLists() {
       axios({
         method: "get",
@@ -132,3 +113,20 @@ export default {
   },
 };
 </script>
+<style scoped>
+.tr {
+  background-color: #fff;
+  color: grey;
+}
+.tr:hover {
+  color: black;
+}
+.delete {
+  translate: 0.1s;
+  color: orange;
+}
+.delete:hover {
+  transform: scale(1.5);
+  color: red;
+}
+</style>

@@ -24,7 +24,7 @@
           x-small
           @click="deleteProduct(id)"
         >
-          <v-icon   small>mdi-delete</v-icon>
+          <v-icon small>mdi-delete</v-icon>
         </v-btn>
       </v-list-item>
     </v-list>
