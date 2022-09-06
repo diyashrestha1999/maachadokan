@@ -11,7 +11,7 @@
           lazy-validation
         >
           <!-- <h1>Update vendor</h1> -->
-          <v-header class="orange--text">Update vendor</v-header>
+          <v-header class="orange--text  text-overline">Update vendor</v-header>
 
           <v-row>
             <v-col cols="12" sm="12">
