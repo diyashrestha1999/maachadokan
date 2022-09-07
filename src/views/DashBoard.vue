@@ -17,7 +17,7 @@
         <router-link to="/orderlist" style="text-decoration: none">
           <v-card-title>
             <v-icon large left> mdi-order-bool-ascending-variant </v-icon>
-            <span class="text-h6 font-weight-light grey--text text-overline ">ORDER</span>
+            <span class="text-h6 font-weight-dark grey--text text-overline ">ORDER</span>
           </v-card-title>
         </router-link>
       </v-card>
@@ -26,7 +26,7 @@
         <router-link to="/categorylist" style="text-decoration: none">
           <v-card-title>
             <v-icon large left> mdi-shape </v-icon>
-            <span class="text-h6 font-weight-light grey--text text-overline">CATEGORY</span>
+            <span class="text-h6 font-weight-dark grey--text text-overline">CATEGORY</span>
           </v-card-title>
         </router-link>
       </v-card>
@@ -43,7 +43,7 @@
       <router-link to="/shoplist" style="text-decoration: none">
         <v-card-title>
           <v-icon large left> mdi-shopping </v-icon>
-          <span class="text-h6 font-weight-light grey--text text-overline">SHOP</span>
+          <span class="text-h6 font-weight-dark grey--text text-overline">SHOP</span>
         </v-card-title>
         <v-row>
       <v-card

@@ -46,6 +46,7 @@
 
 <script>
 import axios from "axios";
+import orderApi from "@/api";
 export default {
   props: ["id"],
   data: () => ({
@@ -90,7 +91,7 @@ export default {
   },
   methods: {
     deleteOrder(id) {
-      axios.delete(`http://localhost:8000/api/orderDetail/${id}/`).then(() => {
+      axios.delete(orderApi.orderDetailApi(id)).then(() => {
         this.getOrderLists();
         // this.noRedirect=true
       });
@@ -101,7 +102,7 @@ export default {
     getOrderLists() {
       axios({
         method: "get",
-        url: "http://localhost:8000/api/orderDetail/",
+        url: orderApi.orderListApi,
       })
         .then((response) => {
           this.order_details = response.data;

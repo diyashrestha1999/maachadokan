@@ -56,6 +56,7 @@
         dark
         width="500"
         height="150"
+        @click="productInShop(shop.id)"
       >
         <DeleteShopVue :id="shop.id" @delete="getShop" />
         <v-card-title class="text-h5 font rounded-lg text-overline">{{ shop.name }} </v-card-title>
@@ -72,6 +73,7 @@
 <script>
 import axios from "axios";
 import DeleteShopVue from "@/components/DeleteShop.vue";
+import shopApi from "@/api"
 export default {
   components: {
     DeleteShopVue,
@@ -91,11 +93,15 @@ export default {
     this.getOwner()
   },
   methods: {
+
+    productInShop(id){
+      this.$router.push(`productsinshop/${id}`)
+    },
  
     getShop() {
       axios({
         methods: "get",
-        url: "http://localhost:8000/api/shop/",
+        url: shopApi.shopListApi,
       })
         .then((response) => {
           this.shops = response.data;
@@ -107,7 +113,7 @@ export default {
 
     addShop() {
       axios
-        .post("http://localhost:8000/api/shop/", {
+        .post(shopApi.shopListApi, {
           name: this.shopName,
           owner: this.ownerName,
         })
@@ -122,7 +128,7 @@ export default {
     getOwner() {
       axios({
         methods: "get",
-        url: "http://localhost:8000/api/vendor/",
+        url:shopApi.vendorListApi,
       }).then((response) => {
         this.owners = response.data;
 
@@ -135,5 +141,9 @@ export default {
 .main {
   background: url("../assets/black-concrete-wall.jpg");
   background-size: cover;
+  transition: 0.2s;
+}
+.main:hover{
+  transform: scale(1.03);
 }
 </style>

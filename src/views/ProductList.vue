@@ -70,6 +70,7 @@
 </template>
 <script>
 import ProductDialogVue from "@/components/ProductDialog.vue";
+import productApi from "@/api"
 import axios from "axios";
 export default {
   components: {
@@ -92,7 +93,7 @@ export default {
           
       axios({
         method: "get",
-        url: "http://127.0.0.1:8000/api/product/",
+        url: productApi.productListApi,
       })
         .then((response) => {
           this.products = response.data;

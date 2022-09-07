@@ -68,6 +68,7 @@
 <script>
 import axios from "axios";
 import DeleteCategoryVue from "@/components/DeleteCategory.vue";
+import categoryApi from "@/api"
 
 export default {
   components:{
@@ -88,7 +89,7 @@ export default {
     getCategory() {
       axios({
         method: "get",
-        url: "http://127.0.0.1:8000/api/category/",
+        url:categoryApi.categoryListApi,
       })
         .then((response) => {
           this.category = response.data;
@@ -100,7 +101,7 @@ export default {
     },
     addCategory() {
       axios
-        .post("http://127.0.0.1:8000/api/category/", {
+        .post(categoryApi.categoryListApi, {
           name: this.categoryName,
         })
         .then((response) => {

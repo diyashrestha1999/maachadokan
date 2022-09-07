@@ -105,7 +105,7 @@
 import axios from "axios";
 import deleteButtonVue from "@/components/deleteButton.vue";
 // import ProductDialogVue from "@/components/ProductDialog.vue";
-
+import vendorApi from "@/api"
 export default {
   components: {
     deleteButtonVue,
@@ -136,7 +136,7 @@ export default {
     },
     addVendor() {
       axios
-        .post("http://localhost:8000/api/vendor/", {
+        .post(vendorApi.vendorListApi, {
           name: this.venodrName,
           number: this.vendorNumber,
           username: this.vendorUsername,
@@ -154,7 +154,7 @@ export default {
     getVendorList() {
       axios({
         methods: "get",
-        url: "http://localhost:8000/api/vendor/",
+        url: vendorApi.vendorListApi,
       })
         .then((response) => {
           this.vendors = response.data;

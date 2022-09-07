@@ -69,6 +69,7 @@
   import axios from "axios";
   import { validationMixin } from "vuelidate";
   import { required } from "vuelidate/lib/validators";
+  import customerDetailListApi from "@/api"
   export default {
     mixins: [validationMixin],
     validations: {
@@ -142,7 +143,7 @@
         this.$refs.form.validate();
   
         axios
-          .patch(`http://localhost:8000/api/customer/${this.id}/`, {
+          .patch(customerDetailListApi.customerDetailApi(this.id), {
             name: this.customer.name,
             email: this.customer.email,
             username: this.customer.username,
@@ -156,7 +157,7 @@
       get_customer_details() {
         axios({
           method: "get",
-          url: `http://localhost:8000/api/customer/${this.id}`,
+          url: customerDetailListApi.customerDetailApi(this.id),
         })
           .then((response) => {
             this.customer = response.data;

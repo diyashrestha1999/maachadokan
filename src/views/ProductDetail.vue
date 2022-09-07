@@ -96,6 +96,7 @@
 import axios from "axios";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import Api from "@/api";
 export default {
   mixins: [validationMixin],
   validations: {
@@ -123,7 +124,7 @@ export default {
       get_categories() {
         axios({
           method: "get",
-          url: "http://localhost:8000/api/category/",
+          url: Api.categoryListApi,
         })
           .then((response) => {
             this.categories = response.data;
@@ -141,7 +142,7 @@ export default {
       get_shoplist() {
         axios({
           method: "get",
-          url: "http://localhost:8000/api/shop/",
+          url: Api.shopListApi,
         }).then((response) => {
           this.shops = response.data;
         });
@@ -186,7 +187,7 @@ export default {
       this.$refs.form.validate();
 
       axios
-        .put(`http://localhost:8000/api/product/${this.id}/`, {
+        .patch(Api.productDetailApi(this.id), {
           name: this.product.name,
           description: this.product.description,
           shop: this.getShopIds(this.product.shop),

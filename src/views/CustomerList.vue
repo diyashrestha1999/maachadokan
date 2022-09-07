@@ -97,7 +97,7 @@
 
 <script>
 import axios from "axios";
-
+import customerApi from "@/api"
 import DeleteCustomerVue from "@/components/DeleteCustomer.vue";
 
 export default {
@@ -129,7 +129,7 @@ export default {
     },
     addCustomer() {
       axios
-        .post("http://localhost:8000/api/customer/", {
+        .post(customerApi.customerListApi, {
           name: this.customerName,
           username: this.customerUsername,
           password: this.customerPassword,
@@ -146,7 +146,7 @@ export default {
     getCustomerList() {
       axios({
         methods: "get",
-        url: "http://localhost:8000/api/customer/",
+        url: customerApi.customerListApi,
       })
         .then((response) => {
           this.customers = response.data;

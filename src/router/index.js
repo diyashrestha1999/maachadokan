@@ -15,7 +15,7 @@ import VendorNew from '../views/VendorNew.vue'
 import DashBoard from '../views/DashBoard.vue'
 import VendorDetail from '../views/VendorDetail.vue'
 import CustomerDetail from '../views/CustomerDetail.vue'
-
+import ProductInShop from '../views/ProductInShop.vue'
 
 Vue.use(VueRouter)
 
@@ -94,6 +94,11 @@ const routes = [
     path:'/customerdetail/:id',
     name:'customerDetail',
     component:CustomerDetail,
+  },
+  {
+    path:'/productsinshop/:id',
+    name:'ProductInShop',
+    component:ProductInShop,
   },
   
 ]

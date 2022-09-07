@@ -80,6 +80,7 @@
 import axios from "axios";
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import vendorApi from "@/api"
 export default {
   mixins: [validationMixin],
   validations: {
@@ -155,7 +156,7 @@ export default {
       this.$refs.form.validate();
 
       axios
-        .patch(`http://localhost:8000/api/vendor/${this.id}/`, {
+        .patch(vendorApi.vendorDetailApi(this.id), {
           name: this.vendor.name,
           number: this.vendor.number,
           email: this.vendor.email,
@@ -170,7 +171,7 @@ export default {
     get_vendor_details() {
       axios({
         method: "get",
-        url: `http://localhost:8000/api/vendor/${this.id}`,
+        url: vendorApi.vendorDetailApi(this.id),
       })
         .then((response) => {
           this.vendor = response.data;

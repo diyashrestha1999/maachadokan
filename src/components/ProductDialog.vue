@@ -44,7 +44,7 @@
 </template>
 <script>
 import axios from "axios";
-
+import productDetailListApi from "@/api"
 
 
 export default {
@@ -58,7 +58,7 @@ export default {
   methods: {
     deleteProduct(id) {
       console.log("deleted");
-      axios.delete(`http://localhost:8000/api/product/${id}/`).then(() => {
+      axios.delete(productDetailListApi.productDetailApi(id)).then(() => {
         this.$emit("delete");
       });
     },

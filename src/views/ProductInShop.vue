@@ -18,7 +18,9 @@
         </template>
         <v-card class="lighten-2">
           <form class="pa-12 white--text" @submit.prevent="checkform">
-            <v-header class="orange--text text-overline">Add product in ({{categoryDetail.name}}) category</v-header>
+            <v-header class="orange--text text-overline"
+              >Add product in ({{ shopDetail.name }}) shop</v-header
+            >
             <v-text-field
               outlined
               color="orange"
@@ -38,21 +40,20 @@
               :error-messages="pushError($v.description)"
               @blur="$v.description.$touch()"
             ></v-text-field>
-            <!-- <v-select
+            <v-select
               outlined
               color="orange"
               :items="categories"
-              v-model="categoryDetail.id"
-              label="Categories"
+              v-model="categories"
+              label="categories"
               :required="!category"
               item-text="name"
               item-value="id"
               :error-messages="pushError($v.category)"
               @blur="$v.category.$touch()"
-          
             >
-            </v-select> -->
-            <v-select
+            </v-select>
+            <!-- <v-select
               outlined
               color="orange"
               v-model="shop"
@@ -65,7 +66,7 @@
               @blur="$v.shop.$touch()"
               
             >
-            </v-select>
+            </v-select> -->
 
             <v-text-field
               outlined
@@ -122,7 +123,7 @@
                   </v-expand-transition>
                 </v-img>
                 <v-card-text class="pt-6" style="position: absolute">
-                  <ProductDialogVue :id="product.id" @delete="get_product_details" />
+                  <ProductDialogVue :id="product.id" @delete="get_products" />
                   <h3
                     class="font-weight-heavy orange--text mb-2 text-center text-overline"
                   >
@@ -159,7 +160,6 @@ export default {
 
   data() {
     return {
-      dialog:false,
       id: this.$route.params.id,
       products: [],
       name: "",
@@ -168,8 +168,8 @@ export default {
       categories: [],
       shops: [],
       numberValue: "",
-      price:"",
-      categoryDetail:[]
+      price: "",
+      shopDetail: [],
     };
   },
 
@@ -177,33 +177,21 @@ export default {
     this.get_product_details();
     this.get_categories();
     this.get_shoplist();
-    this.get_category_detail();
+    this.get_shop_detail();
   },
+
   methods: {
-    pushError(val) {
-      const errors = [];
-      if (!val.$dirty) return errors;
-      !val.required && errors.push("This is required.");
-      return errors;
-    },
-    clear() {
-      this.$v.$reset();
-      this.name = "";
-      this.description = "";
-      this.categories = null;
-      this.shops = null;
-      this.price = "";
-    },
-    get_category_detail(){
+    get_shop_detail() {
       axios({
-        method:"get",
-        url:Api.categoryDeatilApi(this.id)
-      }).then((response)=>{
-        this.categoryDetail=response.data;
+        method: "get",
+        url: Api.shopDetailApi(this.id),
       })
-      .catch((response)=>{
-        console.log(response)
-      })
+        .then((response) => {
+          this.shopDetail = response.data;
+        })
+        .catch((response) => {
+          console.log(response);
+        });
     },
     get_categories() {
       axios({
@@ -217,10 +205,24 @@ export default {
           console.log(response);
         });
     },
+    clear() {
+      this.$v.$reset();
+      this.name = "";
+      this.description = "";
+      this.categories = null;
+      this.shops = null;
+      this.price = "";
+    },
+    pushError(val) {
+      const errors = [];
+      if (!val.$dirty) return errors;
+      !val.required && errors.push("This is required.");
+      return errors;
+    },
     get_product_details() {
       axios({
         method: "get",
-        url: Api.productInCategoryApi(this.id),
+        url: Api.productInShopApi(this.id),
       })
         .then((response) => {
           this.products = response.data;
@@ -247,16 +249,16 @@ export default {
         .post(Api.productListApi, {
           name: this.name,
           description: this.description,
-          shop: [this.shop],
-          category: this.categoryDetail.id,
+          shop: [this.shopDetail.id],
+          category: this.category,
           price: this.price,
         })
         .then((response) => {
           console.log(response);
           // this.$router.push(`/categoryproduct/${this.id}`);
-          this.get_product_details()
-          this.dialog=false
-          this.clear()
+          this.get_product_details();
+          this.dialog = false;
+          this.clear();
         })
         .catch((res) => console.log(res));
     },

@@ -31,7 +31,6 @@
         item-value="id"
         :error-messages="pushError($v.category)"
         @blur="$v.category.$touch()"
-        @click="get_categories"
       >
       </v-select>
       <v-select
@@ -45,7 +44,6 @@
         required
         :error-messages="pushError($v.shop)"
         @blur="$v.shop.$touch()"
-        @click="get_shoplist"
       >
       </v-select>
 
@@ -81,6 +79,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import productListApi from "@/api";
 import axios from "axios";
 export default {
   mixins: [validationMixin],
@@ -98,6 +97,7 @@ export default {
     categories: [],
     shops: [],
     numberValue: "",
+    
   }),
   created() {
     this.get_categories();
@@ -121,7 +121,7 @@ export default {
     get_categories() {
       axios({
         method: "get",
-        url: "http://localhost:8000/api/category/",
+        url: productListApi.categoryListApi,
       })
         .then((response) => {
           this.categories = response.data;
@@ -132,10 +132,8 @@ export default {
     },
     get_shoplist() {
       axios({
-
-        
         method: "get",
-        url: "http://localhost:8000/api/shop/",
+        url: productListApi.shopListApi,
       }).then((response) => {
         this.shops = response.data;
         // this.shops.forEach((ele) => this.shop.push([ele.name,ele.id]));
@@ -147,7 +145,7 @@ export default {
       );
       console.log(this.category);
       axios
-        .post("http://127.0.0.1:8000/api/product/", {
+        .post(productListApi.productListApi, {
           name: this.name,
           description: this.description,
           shop: [this.shop],
@@ -163,5 +161,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

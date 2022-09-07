@@ -23,6 +23,7 @@
 </template>
 <script>
 import axios from "axios";
+import orderdetalListApi from "@/api"
 export default {
   data() {
     return {
@@ -70,7 +71,7 @@ export default {
       console.log("herere"),
         axios({
           method: "get",
-          url: `http://localhost:8000/api/orderDetail/${this.id}/`,
+          url: orderdetalListApi.orderDetailApi(this.id),
         })
           .then((response) => {
             this.orders = response.data;

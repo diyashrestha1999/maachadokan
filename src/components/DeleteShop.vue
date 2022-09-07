@@ -33,6 +33,7 @@
 
 <script>
 import axios from "axios";
+import shopDeailListApi from "@/api"
 export default {
   props: ["id"],
   data() {
@@ -43,7 +44,7 @@ export default {
   methods: {
     deleteProduct(id) {
       console.log("deleted");
-      axios.delete(`http://localhost:8000/api/shop/${id}/`).then(() => {
+      axios.delete(shopDeailListApi.shopDetailApi(id)).then(() => {
         this.$emit("delete");
       });
     },
