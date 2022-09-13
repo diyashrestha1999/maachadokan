@@ -37,7 +37,7 @@ export default {
         { title: "Products", icon: "mdi-purse" , route:'/productlist' },
         { title: "Order List", icon: "mdi-order-bool-ascending-variant", route:'/orderlist' },
         { title: "Categories", icon: "mdi-shape" , route:'/categorylist'},
-        { title: "Vendor", icon: "mdi-forum" , route:'/vendor'},
+        { title: "Vendors", icon: "mdi-forum" , route:'/vendor'},
         { title: "Shop", icon: "mdi-shopping" , route:'/shoplist'},
         { title: "Customers", icon: "mdi-account-group", route:'/customerlist' },
       ],

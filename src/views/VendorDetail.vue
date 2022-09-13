@@ -164,7 +164,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.$router.push({ name: "Vendor" });
+          this.$router.push({ name: "Vendor", params:{isSucess:true}});
         })
         .catch((res) => console.log(res));
     },

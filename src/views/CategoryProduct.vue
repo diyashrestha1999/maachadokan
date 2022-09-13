@@ -191,7 +191,7 @@ export default {
       this.name = "";
       this.description = "";
       this.categories = null;
-      this.shops = null;
+      this.shop = null;
       this.price = "";
     },
     get_category_detail(){

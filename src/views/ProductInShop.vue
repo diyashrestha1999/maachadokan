@@ -44,7 +44,7 @@
               outlined
               color="orange"
               :items="categories"
-              v-model="categories"
+              v-model="category"
               label="categories"
               :required="!category"
               item-text="name"
@@ -209,7 +209,7 @@ export default {
       this.$v.$reset();
       this.name = "";
       this.description = "";
-      this.categories = null;
+      this.category = null;
       this.shops = null;
       this.price = "";
     },

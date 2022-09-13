@@ -150,7 +150,7 @@
           })
           .then((response) => {
             console.log(response);
-            this.$router.push({ name: "customer" });
+            this.$router.push({ name: "customer",params:{isSucess:true} });
           })
           .catch((res) => console.log(res));
       },

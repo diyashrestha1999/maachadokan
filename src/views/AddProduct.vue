@@ -114,8 +114,8 @@ export default {
       this.$v.$reset();
       this.name = "";
       this.description = "";
-      this.categories = null;
-      this.shops = null;
+      this.category = null;
+      this.shop = null;
       this.price = "";
     },
     get_categories() {
@@ -154,7 +154,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.$router.push({ name: "product" });
+          this.$router.push({ name: "product",params:{isAdded:true} });
         })
         .catch((res) => console.log(res));
     },

@@ -2,18 +2,37 @@
   <v-app>
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="orange"
-          class="white--text ma-4"
-          fab
-          small
-          right
-          top
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon small color="white">mdi-plus</v-icon>
-        </v-btn>
+        <v-row>
+        
+            <v-btn
+              color="orange" 
+              class="white--text ma-8"
+              fab
+              small
+              right
+              top
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon small color="white">mdi-plus</v-icon>
+            </v-btn>
+        
+          <v-spacer></v-spacer>
+
+         
+            <v-text-field
+              v-model="searchQuery"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+              out-line
+              color="orange"
+              class="ma-8 shrink"
+              v-on:keyup.enter="onEnter(searchQuery)"
+            ></v-text-field>
+        
+        </v-row>
       </template>
       <v-card>
         <form class="pa-12 white--text" @submit.prevent="addCustomer">
@@ -82,30 +101,57 @@
 
         <v-list-item color="rgba(0, 0, 0, .4)">
           <v-list-item-content>
-            <v-list-item-title class="title text-overline ">{{
+            <v-list-item-title class="title text-overline">{{
               customer.name
             }}</v-list-item-title>
-            <v-list-item-subtitle class="text-caption">Customer</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption"
+              >Customer</v-list-item-subtitle
+            >
 
-            <v-list-item-subtitle class="text-caption">{{ customer.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">{{
+              customer.email
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>
     </v-row>
+    <v-snackbar
+      :timeout="2000"
+      :value="isSucess"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+      Customer sucessfully <strong>Updated</strong>.
+    </v-snackbar>
+
+    <v-snackbar
+      :timeout="2000"
+      :value="isAdded"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+      New customer sucessfully <strong>Added</strong>.
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
 import axios from "axios";
-import customerApi from "@/api"
+import customerApi from "@/api";
 import DeleteCustomerVue from "@/components/DeleteCustomer.vue";
 
 export default {
   components: {
     DeleteCustomerVue,
   },
+  props:['isSucess'],
   data() {
     return {
+      isAdded:false,
       show3: false,
       dialog: false,
       customers: [],
@@ -127,6 +173,16 @@ export default {
     reset() {
       this.getCustomerList();
     },
+    onEnter(id){ axios({
+        methods: "get",
+        url: customerApi.customerFilterApi(id),
+      })
+        .then((response) => {
+          this.customers = response.data;
+        })
+        .catch((response) => {
+          console.log(response);
+        });},
     addCustomer() {
       axios
         .post(customerApi.customerListApi, {
@@ -139,6 +195,7 @@ export default {
           console.log(response);
           this.dialog = false;
           this.reset();
+          this.isAdded=true;
           // alert("sucessfull!!")
         })
         .catch((res) => console.log(res));

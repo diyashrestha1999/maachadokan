@@ -110,7 +110,6 @@ export default {
     return {
       shops: [],
       categories: [],
-
       valid: true,
       fieldRules: [(v) => !!v || "Field is required"],
 
@@ -196,7 +195,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.$router.push({ name: "product" });
+          this.$router.push({ name: "product", params:{isSucess:true} });
         })
         .catch((res) => console.log(res));
     },

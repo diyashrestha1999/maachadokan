@@ -1,6 +1,13 @@
 <template>
   <v-card elevation="24" class="ma-4" max-width="96%" height="95%" title>
-    <v-subheader>Orders List</v-subheader>
+    <v-row>
+        <v-subheader
+          class="font-weight-heavy text-center text-overline ma-4"
+          >Order List</v-subheader
+        >
+        <v-spacer></v-spacer>
+
+      </v-row>
     <v-simple-table>
       <template>
         <thead>
@@ -48,11 +55,11 @@
 import axios from "axios";
 import orderApi from "@/api";
 export default {
-  props: ["id"],
+
   data: () => ({
     dialog: false,
     // noRedirect:false,
-
+    searchQuery:null,
     order_details: {
       id: "",
       quantity: "",
@@ -89,7 +96,9 @@ export default {
   created() {
     this.getOrderLists();
   },
+
   methods: {
+
     deleteOrder(id) {
       axios.delete(orderApi.orderDetailApi(id)).then(() => {
         this.getOrderLists();
@@ -99,8 +108,11 @@ export default {
     orderDetails(id) {
       this.$router.push(`orderDetail/${id}`);
     },
+
     getOrderLists() {
-      axios({
+      
+   
+          axios({
         method: "get",
         url: orderApi.orderListApi,
       })
@@ -110,6 +122,8 @@ export default {
         .catch((response) => {
           console.log(response);
         });
+
+        
     },
   },
 };

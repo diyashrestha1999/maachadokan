@@ -28,7 +28,9 @@ const routes = [
   {
     path: '/productlist',
     name: 'product',
-    component: ProductList
+    component: ProductList,
+    props:true
+
   },
   {
     path: '/orderlist',
@@ -53,7 +55,9 @@ const routes = [
   {
     path: '/customerlist',
     name: 'customer',
-    component: CustomerList
+    component: CustomerList,
+    props:true
+
   }, 
   {
     path: '/addproduct',
@@ -84,6 +88,7 @@ const routes = [
     path:'/vendor',
     name:'Vendor',
     component:VendorNew,
+    props:true
   },
   {
     path:'/vendordetail/:id',

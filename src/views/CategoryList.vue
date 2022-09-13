@@ -63,6 +63,16 @@
         <!-- </v-dialog> -->
       </v-row>
     </div>
+    <v-snackbar
+      :timeout="2000"
+      :value="isAdded"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+     New Category sucessfully <strong>Added</strong>.
+    </v-snackbar>
   </v-app>
 </template>
 <script>
@@ -76,6 +86,7 @@ export default {
   },
   data() {
     return {
+      isAdded:false,
       dialog: false,
       dialog1:false,
       category: {},
@@ -107,7 +118,8 @@ export default {
         .then((response) => {
           console.log(response);
           this.dialog = false;
-          this.getCategory()
+          this.getCategory(),
+          this.isAdded=true
           // alert("sucessfull!!")
         })
         .catch((res) => console.log(res));

@@ -68,6 +68,17 @@
           </v-card-actions> -->
       </v-card>
     </v-row>
+    <v-snackbar
+       
+      :timeout="2000"
+      :value="isAdded"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+      New shop sucessfully <strong>Added</strong>.
+    </v-snackbar>
   </v-app>
 </template>
 <script>
@@ -81,6 +92,7 @@ export default {
 
   data() {
     return {
+      isAdded:false,
       dialog: false,
       shops: [],
       shopName: "",
@@ -120,7 +132,8 @@ export default {
         .then((response) => {
           console.log(response);
           this.dialog = false;
-          this.getShop()
+          this.getShop(),
+          this.isAdded=true
         
         })
         .catch((res) => console.log(res));

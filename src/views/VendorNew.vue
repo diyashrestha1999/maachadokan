@@ -2,23 +2,38 @@
   <v-app>
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="orange"
-          class="white--text ma-4"
-          fab
-          small
-          right
-          top
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon small color="white">mdi-plus</v-icon>
-        </v-btn>
-      </template>
-      <v-card   class="font rounded-lg">
-        <form class="pa-12 white--text " @submit.prevent="addVendor">
+        <v-row>
+          <v-btn
+            color="orange"
+            class="white--text ma-8"
+            fab
+            small
+            right
+            top
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon small color="white">mdi-plus</v-icon>
+          </v-btn>
+
+          <v-spacer></v-spacer>
+
           <v-text-field
-          
+            v-model="searchQuery"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+            out-line
+            color="orange"
+            class="ma-8 shrink"
+            v-on:keyup.enter="onEnter(searchQuery)"
+          ></v-text-field>
+        </v-row>
+      </template>
+      <v-card class="font rounded-lg">
+        <form class="pa-12 white--text" @submit.prevent="addVendor">
+          <v-text-field
             outlined
             color="orange"
             v-model="venodrName"
@@ -91,13 +106,39 @@
             <v-list-item-title class="title text-overline">{{
               vendor.name
             }}</v-list-item-title>
-            <v-list-item-subtitle class="text-caption">Trader</v-list-item-subtitle>
-            <v-list-item-subtitle class="text-overline">{{ vendor.number }}</v-list-item-subtitle>
-            <v-list-item-subtitle class="text-caption">{{ vendor.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption"
+              >Trader</v-list-item-subtitle
+            >
+            <v-list-item-subtitle class="text-overline">{{
+              vendor.number
+            }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-caption">{{
+              vendor.email
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>
     </v-row>
+    <v-snackbar
+      :timeout="2000"
+      :value="isSucess"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+      Vendor sucessfully <strong>Updated</strong>.
+    </v-snackbar>
+    <v-snackbar
+      :timeout="2000"
+      :value="isAdded"
+      absolute
+      bottom
+      color="orange"
+      right
+    >
+     New Vendor sucessfully <strong>Added</strong>.
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -105,13 +146,15 @@
 import axios from "axios";
 import deleteButtonVue from "@/components/deleteButton.vue";
 // import ProductDialogVue from "@/components/ProductDialog.vue";
-import vendorApi from "@/api"
+import vendorApi from "@/api";
 export default {
   components: {
     deleteButtonVue,
   },
+  props: ["isSucess"],
   data() {
     return {
+      isAdded:false,
       show3: false,
       dialog: false,
       vendors: [],
@@ -134,6 +177,18 @@ export default {
     reset() {
       this.getVendorList();
     },
+    onEnter(id) {
+      axios({
+        methods: "get",
+        url: vendorApi.vendorFilterApi(id),
+      })
+        .then((response) => {
+          this.vendors = response.data;
+        })
+        .catch((response) => {
+          console.log(response);
+        });
+    },
     addVendor() {
       axios
         .post(vendorApi.vendorListApi, {
@@ -147,6 +202,7 @@ export default {
           console.log(response);
           this.dialog = false;
           this.reset();
+          this.isAdded=true
           // alert("sucessfull!!")
         })
         .catch((res) => console.log(res));

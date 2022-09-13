@@ -1,22 +1,29 @@
 <template>
   <v-app>
     <v-container class="grey lighten-5">
-   
-      <router-link to="/addproduct" style="text-decoration: none">
-        <v-btn
-          color="orange"
-          class="white--text my-4"
-          fab
-          small
-          right
-          top
-    
-        >
-          <v-icon small color="white">mdi-plus</v-icon>
-        </v-btn>
-      </router-link>
+      <h3 class="font-weight-heavy text-overline grey--text">Product List</h3>
+
       <v-row>
-        <v-col v-for="product in products" :key="product.id" md="2">
+        <router-link to="/addproduct" style="text-decoration: none">
+          <v-btn color="orange" class="white--text ma-4" fab small right top>
+            <v-icon small color="white">mdi-plus</v-icon>
+          </v-btn>
+        </router-link>
+
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="searchQuery"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+          out-line
+          color="orange"
+          class="shrink ma-4"
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-col v-for="product in resultQuery" :key="product.id" md="2">
           <v-card
             class="font rounded-lg"
             elevation="5"
@@ -32,15 +39,7 @@
                   <v-expand-transition>
                     <div
                       v-if="hover"
-                      class="
-                        d-flex
-                        transition-fast-in-fast-out
-                        orange
-                        v-card--reveal
-                        text-h6
-                        white--text
-                        text--darken-10
-                      "
+                      class="d-flex transition-fast-in-fast-out orange v-card--reveal text-h6 Mimosa--text text--darken-4"
                       style="height: 100%"
                     >
                       ${{ product.price }}
@@ -48,14 +47,9 @@
                   </v-expand-transition>
                 </v-img>
                 <v-card-text class="pt-6" style="position: absolute">
-                  <ProductDialogVue :id="product.id" @delete="get_products"/>
+                  <ProductDialogVue :id="product.id" @delete="get_products" />
                   <h3
-                    class="
-                      font-weight-heavy
-                      orange--text
-                      mb-2
-                      text-center text-overline
-                    "
+                    class="font-weight-heavy orange--text mb-2 text-center text-overline"
                   >
                     {{ product.name }}
                   </h3>
@@ -65,32 +59,69 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-snackbar
+        :timeout="2000"
+        :value="isSucess"
+        absolute
+        bottom
+        color="orange"
+        right
+      >
+        Product sucessfully <strong>Updated</strong>.
+      </v-snackbar>
+      <v-snackbar
+        :timeout="2000"
+        :value="isAdded"
+        absolute
+        bottom
+        color="orange"
+        right
+      >
+       New Product sucessfully <strong>Added</strong>.
+      </v-snackbar>
     </v-container>
   </v-app>
 </template>
 <script>
 import ProductDialogVue from "@/components/ProductDialog.vue";
-import productApi from "@/api"
+import productApi from "@/api";
 import axios from "axios";
 export default {
   components: {
     ProductDialogVue,
   },
+  props: ["isSucess","isAdded"],
 
   data() {
     return {
       products: [],
       dialog: false,
-    
+      searchQuery: null,
+      snackbar: false,
+      timeout: 2000,
     };
   },
   mounted() {
     this.get_products();
   },
+  computed: {
+    resultQuery() {
+      if (this.searchQuery) {
+        console.log("im hereeeeeeeeeeeeeeee");
+        return this.products.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
+        return this.products;
+      }
+    },
+  },
   methods: {
     addProduct() {},
     get_products() {
-          
       axios({
         method: "get",
         url: productApi.productListApi,

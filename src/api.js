@@ -13,8 +13,9 @@ export default {
     productListApi: "http://localhost:8000/api/product/",
     productDetailApi: productId=> `http://localhost:8000/api/product/${productId}/`,
     productInShopApi: shopId => `http://localhost:8000/api/product-in-shop/?shop=${shopId}`,
-    productInCategoryApi: categoryId => `http://localhost:8000/api/product-in-category/?category=${categoryId}`
-
+    productInCategoryApi: categoryId => `http://localhost:8000/api/product-in-category/?category=${categoryId}`,
+    vendorFilterApi: vendorId=> `http://localhost:8000/api/vendor/?search=${vendorId}`,
+    customerFilterApi: customerId=> `http://localhost:8000/api/customer/?search=${customerId}`,
 
 
 
